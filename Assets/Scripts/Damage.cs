@@ -7,13 +7,14 @@ public class Damage : MonoBehaviour
     float health;
     float damage;
     bool isDead;
+    ColorBlock theColor;
     [SerializeField] Button player;
     [SerializeField]Text textHp;
     // Start is called before the first frame update
     void Start()
     {
         health = 100;
-        
+        theColor = GetComponent<Button>().colors;
         
     }
 
@@ -23,9 +24,7 @@ public class Damage : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
-            var colors = GetComponent<Button>().colors;
-            colors.normalColor = Color.gray;
-            GetComponent<Button>().colors = colors;
+            ButtonColor();
             isDead = true;
             textHp.text = "dead";
         }
@@ -38,5 +37,10 @@ public class Damage : MonoBehaviour
     public void TakeDamage()
     {
         health -= damage;
+    }
+    public void ButtonColor()
+    {
+        
+        player.colors = theColor;
     }
 }
